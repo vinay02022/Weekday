@@ -26,8 +26,11 @@ Git Clone https://github.com/vinay02022/Weekday.git
 
 # Installation
 Install all the Dependencies by
- to Start By command ->  npm i  
-# npm start
+ to Start By command ->  npm i 
+
+# start -
+ To Start The application naviate to the weeday Assignment and Command # npm start
+
 
 # Build 
 npm run build
