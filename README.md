@@ -10,6 +10,7 @@ This web application allows users to browse and filter job listings based on cri
 # Responsive Design:- 
     Works seamlessly on both desktop and mobile devices.
 Easy Apply: Apply to job listings directly from the platform.
+Ask For Referral : user Can Ask referral from his connection or person.
 Dynamic Sidebar: Adjusts width dynamically based on user interactions.
 # Technologies
 React: Frontend framework for building user interfaces.
@@ -22,9 +23,10 @@ CSS: Used for styling and layout.
 # To clone this Repo
 Git Clone https://github.com/vinay02022/Weekday.git
 
+
 # Installation
 Install all the Dependencies by
- to Start npm i  
+ to Start By command ->  npm i  
 # npm start
 
 # Build 
