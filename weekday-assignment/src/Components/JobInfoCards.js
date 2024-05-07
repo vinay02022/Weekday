@@ -1,84 +1,192 @@
-import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button, Box } from '@mui/material';
-import { HourglassTop, RoomOutlined } from '@mui/icons-material';
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Box,
+  ButtonGroup,
+} from "@mui/material";
+import { HourglassTop, RoomOutlined } from "@mui/icons-material";
+import useEstSalary from "../Hooks/useEstSalary";
+import ApplyButton from "./ApplyButton";
 
-const JobInfoCard = () => {
+const JobInfoCards = ({ job }) => {
+  const [hovered, setHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
-
-  const handleExpandClick = () => {
+  const handleExpands = () => {
     setExpanded(!expanded);
+  };
+  const salary = useEstSalary({ job });
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
-    <Card sx={{
-        margin: 2,
-        boxShadow: 2,
-        border: '1px solid #d7dbd8',
-        borderRadius: 5,
-        width: {
-          xs: '90%', 
-          sm: 'calc(33.33% - 16px)', // it will take 1/3 width on small screens (minus gutters)
-        },
-      }}>
+    <Card
+    sx={{
+      width: "24vw", // Width set to 25% of the viewport width
+      "&:hover": {
+        backgroundColor: hovered ? "rgba(0, 0, 0, 0.4)" : "inherit",
+        transform: hovered ? "translateY(3px) scale(1.02)" : "none", // Added scale for smoother effect
+        border: hovered ? "2px solid blue" : "2px solid rgba(0, 0, 0, 0.12)", // Blue border on hover
+        transition: "transform 0.2s ease", // Added transition for smoother movement
+      },
+    }}
+    >
       <CardContent sx={{ padding: 2 }}>
-        <Box sx={{ border: '1px solid #d7dbd8', borderRadius: 3, display: 'flex', flexDirection: 'row', alignItems: 'center', width: 'fit-content', p: 1 }}>
-          <HourglassTop sx={{ fontSize: 13 }} />
-          <Typography sx={{ fontSize: 13 }}>Posted 3 days ago</Typography>
+        <Box
+          sx={{
+            border: "1px solid #d7dbd8",
+            borderRadius: 3,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            width: "fit-content",
+            p: 1,
+          }}
+        >
+          <HourglassTop sx={{ fontSize: 12 }} />
+          <Typography sx={{ fontSize: 12 }}>
+            Posted :{job.minExp + 1} days ago
+          </Typography>
         </Box>
 
-        <Box sx={{ mt: 2 }} display="flex" flexDirection="row">
-          <Box sx={{ width: '23%', height: '75%', mr: 1 }}>
-            <img src="https://example.com/company-logo.png" alt="Company Logo" style={{ width: '100%', height: '100%', borderRadius: 20 }} />
+        <Box sx={{ mt: 2 }} display={"flex"} flexDirection={"row"}>
+          <Box sx={{ width: "36%", height: "60%", mr: 1 }}>
+            <img
+              src={job.logoUrl}
+              alt="Company Logo"
+              style={{ width: "100%", height: "100%", borderRadius: 20 }}
+            />
           </Box>
-          <Box sx={{ width: '80%' }}>
-            <Typography variant="h5" component="div" sx={{ fontSize: '1.2rem', color: '#7f8280', fontWeight: 500, mb: 0.5 }}>
-              Example Company Inc.
+          <Box sx={{ width: "99%" }}>
+            <Typography
+              variant="h5"
+              component="div"
+              sx={{
+                fontSize: "1.2rem",
+                color: "#7f8280",
+                fontWeight: "500",
+                mb: 0.5,
+              }}
+            >
+              {job.companyName}
             </Typography>
-            <Typography component="div" sx={{ fontSize: '1rem', color: '#393b39', fontWeight: 400, mb: 0.5 }}>
-              Software Developer
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "1rem",
+                color: "#393b39",
+                fontWeight: "400",
+                mb: 0.5,
+              }}
+            >
+              {job.jobRole.charAt(0).toUpperCase() +
+                job.jobRole.slice(1).toLowerCase()}{" "}
+              {job.jobRole.toLowerCase() !== "tech lead" ? "Developer" : ""}
             </Typography>
-            <Box display="flex" flexDirection="row" sx={{ alignItems: 'center', fontSize: '0.8rem', mb: 0.5 }}>
+            <Box
+              display={"flex"}
+              flexDirection={"row"}
+              sx={{ alignItems: "center", fontSize: "0.8rem", mb: 0.5 }}
+            >
               <RoomOutlined sx={{ mr: 0.5 }} />
-              <Typography variant="body1" color="#5e615f" fontWeight={400} sx={{ fontSize: '0.9rem', ml: 0.5 }}>
-                Bengaluru, India
+              <Typography
+                variant="body1"
+                color="#5e615f"
+                fontWeight={400}
+                sx={{ fontSize: "0.9rem", ml: 0.5 }}
+              >
+                {job.location.charAt(0).toUpperCase() +
+                  job.location.slice(1).toLowerCase()}
               </Typography>
             </Box>
           </Box>
         </Box>
 
-        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 1 }}>
-          <Typography variant="body1" fontWeight={400} color="#5e615f" sx={{ fontSize: '1rem', mr: 1 }}>
-            Estimated Salary: $80,000 - $100,000 per year
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            mb: 1,
+          }}
+        >
+          <Typography
+            variant="body1"
+            fontWeight={400}
+            color="#5e615f"
+            sx={{ fontSize: "1rem", mr: 1 }}
+          >
+            Estimated Salary: {salary}
           </Typography>
-          <Typography variant="body1" fontWeight={400} color="#5e615f" sx={{ fontSize: '1rem' }}>
-            ☑
+          <Typography
+            variant="body1"
+            fontWeight={500}
+            color="#5e615f"
+            sx={{ fontSize: "1.5rem" }}
+          >
+            ✅
           </Typography>
         </Box>
 
-        <Typography variant="body2" sx={{ fontWeight: 500 }}>
+        <Typography variant="body2" sx={{ fontWeight: "500" }}>
           About Company:
         </Typography>
-        <Typography variant="body1" sx={{ fontWeight: 400, mb: 1 }}>
-          Example Company Inc. is a leading technology company specializing in software development and innovative solutions.
+        <Typography variant="body1" sx={{ fontWeight: "400", mb: 1 }}>
+          About Us
         </Typography>
-        <Typography variant="body2" className="description" sx={{ fontWeight: 300 }}>
-          We are committed to creating cutting-edge products that transform industries and improve lives. Our team of talented developers works collaboratively to deliver exceptional software solutions.
-          <Button onClick={handleExpandClick} className="expand-button" sx={{ color: 'gray', fontWeight: 300 }}>
-            {expanded ? 'Read less' : 'Read more'}
+        <Typography
+          variant="body2"
+          className="description"
+          sx={{ fontWeight: 300 }}
+        >
+          {job.jobDetailsFromCompany
+            ? expanded
+              ? job.jobDetailsFromCompany
+              : `${job.jobDetailsFromCompany.substring(0, 100)}...`
+            : "No description available"}
+          <Button
+            onClick={handleExpands}
+            className="expand-button"
+            sx={{ color: "gray", fontWeight: 300 }}
+          >
+            {expanded ? "Read less" : "Read more"}
           </Button>
         </Typography>
 
         <Box sx={{ marginBottom: 1 }}>
-          <Typography variant="body1" fontWeight={600} color="#5e615f" sx={{ backgroundColor: '#fff', fontSize: '0.8rem', p: 1 }}>
-            Minimum Experience
+          <Typography
+            variant="body1"
+            fontWeight={600}
+            color="#5e615f"
+            sx={{ backgroundColor: "#fff", fontSize: "0.8rem", p: 1 }}
+          >
+            Minimum Experience :
           </Typography>
-          <Typography variant="body1" color="#5e615f" sx={{ backgroundColor: '#fff', fontSize: '0.8rem', p: 1, mb: 1 }}>
-            2 years
+          <Typography
+            variant="body1"
+            color="#5e615f"
+            sx={{ backgroundColor: "#fff", fontSize: "0.8rem", p: 1, mb: 1 }}
+          >
+            {job.minExp ? job.minExp + "years" : "1+ years"}
           </Typography>
         </Box>
+
+        <ApplyButton onClick={handleSubmit} />
       </CardContent>
     </Card>
   );
 };
 
-export default JobInfoCard;
+export default JobInfoCards;
