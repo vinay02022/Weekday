@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { WHOLE_LOGO, LOGO_URL } from "../utils/constants";
 import {
   Home,
   Search,
@@ -8,7 +9,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "@mui/icons-material";
-import { WHOLE_LOGO, LOGO_URL } from "../utils/constants";
 
 const SideNav = () => {
   const [collapsed, setCollapsed] = useState(true);
