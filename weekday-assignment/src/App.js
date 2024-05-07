@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
+import JobInfoCards from './Components/JobInfoCards';
 
 function App() {
   return (
     <div className="App">
    
-          Learn React-init
-     
+          
+     <JobInfoCards/>
     </div>
   );
 }
