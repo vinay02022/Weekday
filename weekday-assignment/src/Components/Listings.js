@@ -1,6 +1,6 @@
 import React from 'react'
 import JobInfoCards from './JobInfoCards'
-import Filters from './Filters'
+import AllFilters from './AllFilters';
 import { Grid } from '@mui/material'
 import useJobListing from '../Hooks/useJobListing';
 import CardShimmer from './CardShimmer';
@@ -18,7 +18,6 @@ const renderSkeletons = () => {
     );
 };
 
-
 const Listings = () => {
     const {
         loading,
@@ -31,7 +30,7 @@ const Listings = () => {
   return (
     <div>
     <h1 style={{fontWeight:300}}>Search Jobs</h1>
-    <Filters onFilter={handleFilter}/>
+    <AllFilters onFilter={handleFilter}/>
     <Grid container spacing={9}>
         { 
             filteredJobs.map((job) => (
