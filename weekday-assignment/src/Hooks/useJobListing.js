@@ -71,7 +71,7 @@ const useJobListing = () => {
         }, [dispatch, jobs.length, totalCount, loading, filterParams]);
 
         useEffect(() => {
-            handleScroll(); // Call the handleScroll function once on initial render
+            handleScroll(); // called for initial render
             }, [handleScroll]);
 
 
@@ -85,13 +85,13 @@ const useJobListing = () => {
 
   const applyFilters = useCallback(() => {
     return jobs.filter((job) => {
-      // Convert minExp to a number for comparison
+      // Converted minExp to a number for comparison
       const minExpNumber = parseFloat(job.minExp);
 
-      // Convert minJdSalary to a number for comparison
+      // Converted minJdSalary to a number for comparison
       const minSalaryNumber = parseFloat(job.minJdSalary);
 
-      // Check if job roles match any of the selected job role(s)
+
       const jobRoleMatched =
         filterParams.jobRole.length === 0 ||
         filterParams.jobRole.some((selectedRole) =>
