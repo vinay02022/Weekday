@@ -55,7 +55,7 @@ const AllFilters = ({ onFilter }) => {
     return (
         <div className="filter">
             <form>
-                <Grid container spacing={2} justifyContent='center'>
+                <Grid container spacing={2} justifyContent='center' sx={{marginBottom:2}}>
                     <Grid item xs={12} sm={2}>
                         <TextField
                             type="text"
