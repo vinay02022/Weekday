@@ -26,3 +26,9 @@ Git Clone https://github.com/vinay02022/Weekday.git
 Install all the Dependencies by
  to Start npm i  
 # npm start
+
+# Build 
+npm run build
+
+# Deployed link Vercel
+https://weekday-1z8q15cgd-vinay-pandeys-projects.vercel.app/
